@@ -1,10 +1,13 @@
+var path = require('path');
 var tape = require('tape');
 var Provider = require('butter-provider');
 
-var config = Provider.prototype.parseArgs('stremio?auth={"url":"http://api8.herokuapp.com","key":"423f59935153f2f5d2db0f6c9b812592b61b3737"}&url=http://localhost:9005');
+var pkg = require(path.join(process.cwd(), 'package.json'));
+
+var config = Provider.prototype.parseArgs(pkg.butter.testArgs);
 
 function load() {
-    return require('../');
+    return require(process.cwd());
 }
 
 tape('loads', function (t) {
