@@ -37,5 +37,7 @@ tape('fetch', function (t) {
         t.ok(r, 'we were able to fetch')
         t.ok(I.extractIds(r), 'extractIds')
         t.end();
+    }).catch(function (e) {
+        t.notOk(e, 'failed fetch')
     })
 })
