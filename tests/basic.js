@@ -34,7 +34,8 @@ tape('fetch', function (t) {
     var I = new P(config.args);
 
     I.fetch().then(function (r) {
-        t.ok(r, 'we were able to get')
+        t.ok(r, 'we were able to fetch')
+        t.ok(I.extractIds(r), 'extractIds')
         t.end();
     })
 })
