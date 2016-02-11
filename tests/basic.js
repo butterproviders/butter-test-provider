@@ -28,7 +28,7 @@ tape('loads', function (t) {
 })
 
 tape('fetch', function (t) {
-    t.timeoutAfter(1000);
+    t.timeoutAfter(10000);
 
     var P = load();
     var I = new P(config.args);
