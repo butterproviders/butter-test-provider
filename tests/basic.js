@@ -36,6 +36,9 @@ tape('fetch', function (t) {
 
     I.fetch().then(function (r) {
         t.ok(r, 'we were able to fetch')
+        t.ok(r.hasMore===true || r.hasMore===false, 'we have a hasMore field that is a boolean: ')
+        t.ok(r.results, 'we have a results field')
+        t.ok(r.results.length > 0, 'we have at least 1 result')
         t.ok(I.extractIds(r), 'extractIds')
         t.end();
     }).catch(function (e) {
