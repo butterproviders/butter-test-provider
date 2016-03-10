@@ -3,6 +3,7 @@ var tape = require('tape');
 var Provider = require('butter-provider');
 
 var pkg = require(path.join(process.cwd(), 'package.json'));
+var timeout = pkg.butter.timeout || 10000;
 
 var config = Provider.prototype.parseArgs(pkg.butter.testArgs);
 
@@ -28,7 +29,7 @@ tape('loads', function (t) {
 })
 
 tape('fetch', function (t) {
-    t.timeoutAfter(10000);
+    t.timeoutAfter(timeout);
 
     var P = load();
     var I = new P(config.args);
