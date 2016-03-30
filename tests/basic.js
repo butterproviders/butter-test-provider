@@ -6,7 +6,11 @@ var debug = require('debug')('butter-provider:tests')
 var pkg = require(path.join(process.cwd(), 'package.json'));
 var timeout = pkg.butter.timeout || 10000;
 
-var config = Provider.prototype.parseArgs(pkg.butter.testArgs);
+var config = {};
+
+if (pkg.butter && pkg.butter.testArgs) {
+    config = Provider.prototype.parseArgs(pkg.butter.testArgs);
+}
 
 function load() {
     return require(process.cwd());
