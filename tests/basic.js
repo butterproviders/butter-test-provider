@@ -4,12 +4,14 @@ var Provider = require('butter-provider');
 var debug = require('debug')('butter-provider:tests')
 
 var pkg = require(path.join(process.cwd(), 'package.json'));
-var timeout = pkg.butter.timeout || 10000;
 
-var config = {};
+var config = {
+    args: {},
+    timeout: 1000
+};
 
 if (pkg.butter && pkg.butter.testArgs) {
-    config = Provider.prototype.parseArgs(pkg.butter.testArgs);
+    config.args = Object.assign({}, config.args, Provider.prototype.parseArgs(pkg.butter.testArgs))
 }
 
 function load() {
@@ -34,8 +36,8 @@ tape('loads', function (t) {
 })
 
 tape('fetch', function (t) {
-    debug('fetch, timeout', timeout)
-    t.timeoutAfter(timeout);
+    debug('fetch, timeout', config.timeout)
+    t.timeoutAfter(config.timeout);
 
     var P = load();
     var I = new P(config.args);
