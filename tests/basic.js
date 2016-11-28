@@ -11,7 +11,7 @@ var config = {
 };
 
 if (pkg.butter && pkg.butter.testArgs) {
-    config.args = Object.assign({}, config.args, Provider.prototype.parseArgs(pkg.butter.testArgs))
+    config.args = Object.assign({}, config.args, Provider.prototype.parseArgs(pkg.butter.testArgs).args)
 }
 
 function load() {
@@ -31,6 +31,8 @@ tape('loads', function (t) {
     t.ok(I.config.uniqueId, 'we have a uniqueId')
     t.ok(I.config.tabName, 'we have a tabName')
     t.ok(I.config.type, 'we have a type')
+
+    t.ok(I.args, 'we have an args object')
 
     t.end();
 })

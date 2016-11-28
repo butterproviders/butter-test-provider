@@ -1,6 +1,6 @@
 {
   "name": "butter-test-provider",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Tests for butter provider",
   "main": "index.js",
   "scripts": {
