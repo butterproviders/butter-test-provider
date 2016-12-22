@@ -18,6 +18,10 @@ function load() {
     return require(process.cwd());
 }
 
+tape.onFinish(function() { 
+  process.exit(0)
+});
+
 tape('loads', function (t) {
     var P = load();
 
