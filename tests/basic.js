@@ -19,7 +19,7 @@ function load() {
 }
 
 tape.onFinish(function() { 
-  process.exit(0)
+    process.exit(0)
 });
 
 tape('loads', function (t) {
