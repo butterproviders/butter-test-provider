@@ -78,6 +78,8 @@ tape('fetch', function (t) {
             debug ('detail', d);
             testDetail(t, d, I.config.uniqueId);
             t.end();
+        }).catch(function (e) {
+            t.notOk(e, 'failed detail');
         });
     }).catch(function (e) {
         t.notOk(e, 'failed fetch');
@@ -96,6 +98,6 @@ tape('random', function (t) {
         testDetail(t, r, I.config.uniqueId);
         t.end();
     }).catch(function (e) {
-        t.notOk(e, 'failed fetch');
+        t.notOk(e, 'failed random');
     });
 });
