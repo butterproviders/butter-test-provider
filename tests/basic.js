@@ -72,7 +72,7 @@ tape('fetch', function (t) {
             t.ok(d.subtitle, 'we have a subtitle');
             t.ok(d.trailer, 'we have a trailer');
             t.ok(d.synopsis, 'we have a synopsis');
-            t.ok(d.type===Generic.TabType.MOVIE || d.type===Generic.TabType.TVSHOW || d.type===Generic.TabType.ANIME, 'we have a type field w');
+            t.ok(d.type===Provider.TabType.MOVIE || d.type===Provider.TabType.TVSHOW || d.type===Provider.TabType.ANIME, 'we have a type field w');
         });
 
         t.end();
@@ -108,7 +108,7 @@ tape('random', function (t) {
         t.ok(r.subtitle, 'we have a subtitle');
         t.ok(r.trailer, 'we have a trailer');
         t.ok(r.synopsis, 'we have a synopsis');
-        t.ok(r.type===Generic.TabType.MOVIE || r.type===Generic.TabType.TVSHOW || r.type===Generic.TabType.ANIME, 'we have a type field w');
+        t.ok(r.type===Provider.TabType.MOVIE || r.type===Provider.TabType.TVSHOW || r.type===Provider.TabType.ANIME, 'we have a type field w');
         t.end();
     }).catch(function (e) {
         t.notOk(e, 'failed fetch');
