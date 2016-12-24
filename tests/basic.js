@@ -39,7 +39,7 @@ tape('loads', function (t) {
     t.ok(I.args, 'we have an args object');
 
     t.end();
-})
+});
 
 tape('fetch', function (t) {
     debug('fetch, timeout', config.timeout);
