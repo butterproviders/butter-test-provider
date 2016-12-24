@@ -10,11 +10,6 @@ var config = {
     timeout: 1000
 };
 
-var types = {
-    movie: 'movie',
-    show: 'show'
-};
-
 if (pkg.butter && pkg.butter.testArgs) {
     config.args = Object.assign({}, config.args, Provider.prototype.parseArgs(pkg.butter.testArgs).args);
 }
@@ -34,19 +29,19 @@ function testDetail(t, d, uniqueId) {
   t.ok(d.poster, 'we have a poster');
   t.ok(d.backdrop, 'we have a backdrop');
   t.ok(d.subtitle, 'we have a subtitle');
-  t.ok(d.trailer, 'we have a trailer');
   t.ok(d.synopsis, 'we have a synopsis');
 
   var type = d.type;
-  t.ok(type===types.movie || type===types.show, 'we have a type field which is a tab type');
+  t.ok(type===Provider.ItemType.MOVIE || type===Provider.ItemType.TVSHOW, 'we have a type field which is a tab type');
 
-  if (type===types.movie) {
+  if (type === Provider.ItemType.MOVIE) {
+      t.ok(d.trailer, 'we have a trailer');
       t.ok(d.torrents, 'we have a torrents field');
-  } else if (type===types.show) {
+  } else if (type===Provider.ItemType.TVSHOW) {
       t.ok(d.episodes, 'we have an episodes field');
       t.ok(d.episodes.length > 0, 'we have at least 1 episode');
   } else {
-      t.notOk(type, 'is not a valid type')
+      t.notOk(type, 'is not a valid type');
   }
 }
 
