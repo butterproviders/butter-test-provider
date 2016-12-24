@@ -88,11 +88,6 @@ tape('random', function (t) {
     var P = load();
     var I = new P(config.args);
 
-    if (!I.random) {
-        t.ok(null, 'this provider does not have a random function');
-        t.end();
-    }
-
     I.random().then(function (r) {
         debug ('random', r);
         t.ok(r, 'we were able to get a random');
