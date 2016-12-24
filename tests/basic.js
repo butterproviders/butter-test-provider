@@ -18,6 +18,23 @@ function load() {
     return require(process.cwd());
 }
 
+function testDetail(t, d, uniqueId) {
+  t.ok(d, 'we were able to get details');
+  t.ok(d[uniqueId] || d.id, 'we have an unique id');
+  t.ok(d.title, 'we have a title');
+  t.ok(d.year, 'we have a year');
+  t.ok(d.genre, 'we have a genre field');
+  t.ok(d.genre.length > 0, 'we have at least 1 genre');
+  t.ok(d.rating, 'we have a rating');
+  t.ok(d.poster, 'we have a poster');
+  t.ok(d.backdrop, 'we have a backdrop');
+  t.ok(d.torrents, 'we have a torrents field');
+  t.ok(d.subtitle, 'we have a subtitle');
+  t.ok(d.trailer, 'we have a trailer');
+  t.ok(d.synopsis, 'we have a synopsis');
+  t.ok(d.type===Provider.TabType.MOVIE || d.type===Provider.TabType.TVSHOW || d.type===Provider.TabType.ANIME, 'we have a type field which is a tab type');
+}
+
 tape.onFinish(function() {
     process.exit(0);
 });
@@ -59,23 +76,9 @@ tape('fetch', function (t) {
         t.ok(uniqueIds, 'extractIds');
         I.detail(uniqueIds[0], r.results[0]).then(function (d) {
             debug ('detail', d);
-            t.ok(d, 'we were able to get details');
-            t.ok(d[I.config.uniqueId] || d.id, 'we have an unique id');
-            t.ok(d.title, 'we have a title');
-            t.ok(d.year, 'we have a year');
-            t.ok(d.genre, 'we have a genre field');
-            t.ok(d.genre.length > 0, 'we have at least 1 genre');
-            t.ok(d.rating, 'we have a rating');
-            t.ok(d.poster, 'we have a poster');
-            t.ok(d.backdrop, 'we have a backdrop');
-            t.ok(d.torrents, 'we have a torrents field');
-            t.ok(d.subtitle, 'we have a subtitle');
-            t.ok(d.trailer, 'we have a trailer');
-            t.ok(d.synopsis, 'we have a synopsis');
-            t.ok(d.type===Provider.TabType.MOVIE || d.type===Provider.TabType.TVSHOW || d.type===Provider.TabType.ANIME, 'we have a type field which is a tab type');
+            testDetail(t, d, I.config.uniqueId);
+            t.end();
         });
-
-        t.end();
     }).catch(function (e) {
         t.notOk(e, 'failed fetch');
     });
@@ -90,20 +93,7 @@ tape('random', function (t) {
 
     I.random().then(function (r) {
         debug ('random', r);
-        t.ok(r, 'we were able to get a random');
-        t.ok(r[I.config.uniqueId] || d.id, 'we have an unique id');
-        t.ok(r.title, 'we have a title');
-        t.ok(r.year, 'we have a year');
-        t.ok(r.genre, 'we have a genre field');
-        t.ok(r.genre.length > 0, 'we have at least 1 genre');
-        t.ok(r.rating, 'we have a rating');
-        t.ok(r.poster, 'we have a poster');
-        t.ok(r.backdrop, 'we have a backdrop');
-        t.ok(r.torrents, 'we have a torrents field');
-        t.ok(r.subtitle, 'we have a subtitle');
-        t.ok(r.trailer, 'we have a trailer');
-        t.ok(r.synopsis, 'we have a synopsis');
-        t.ok(r.type===Provider.TabType.MOVIE || r.type===Provider.TabType.TVSHOW || r.type===Provider.TabType.ANIME, 'we have a type field which is a tab type');
+        testDetail(t, r, I.config.uniqueId);
         t.end();
     }).catch(function (e) {
         t.notOk(e, 'failed fetch');
