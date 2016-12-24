@@ -54,7 +54,27 @@ tape('fetch', function (t) {
         t.ok(r.hasMore===true || r.hasMore===false, 'we have a hasMore field that is a boolean: ');
         t.ok(r.results, 'we have a results field');
         t.ok(r.results.length > 0, 'we have at least 1 result');
-        t.ok(I.extractIds(r), 'extractIds');
+
+        var uniqueIds = I.extractIds(r);
+        t.ok(uniqueIds, 'extractIds');
+        I.detail(uniqueIds[0], r.results[0]).then(function (d) {
+            debug ('detail', d);
+            t.ok(d, 'we were able to get details');
+            t.ok(d[I.config.uniqueId] || d.id, 'we have an unique id');
+            t.ok(d.title, 'we have a title');
+            t.ok(d.year, 'we have a year');
+            t.ok(d.genre, 'we have a genre field');
+            t.ok(d.genre.length > 0, 'we have at least 1 genre');
+            t.ok(d.rating, 'we have a rating');
+            t.ok(d.poster, 'we have a poster');
+            t.ok(d.backdrop, 'we have a backdrop');
+            t.ok(d.torrents, 'we have a torrents field');
+            t.ok(d.subtitle, 'we have a subtitle');
+            t.ok(d.trailer, 'we have a trailer');
+            t.ok(d.synopsis, 'we have a synopsis');
+            t.ok(d.type===Generic.TabType.MOVIE || d.type===Generic.TabType.TVSHOW || d.type===Generic.TabType.ANIME, 'we have a type field w');
+        });
+
         t.end();
     }).catch(function (e) {
         t.notOk(e, 'failed fetch');
