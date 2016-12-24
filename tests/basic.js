@@ -33,11 +33,21 @@ function testDetail(t, d, uniqueId) {
   t.ok(d.rating, 'we have a rating');
   t.ok(d.poster, 'we have a poster');
   t.ok(d.backdrop, 'we have a backdrop');
-  t.ok(d.torrents, 'we have a torrents field');
   t.ok(d.subtitle, 'we have a subtitle');
   t.ok(d.trailer, 'we have a trailer');
   t.ok(d.synopsis, 'we have a synopsis');
-  t.ok(d.type===types.movie || d.type===types.show, 'we have a type field which is a tab type');
+
+  var type = d.type;
+  t.ok(type===types.movie || type===types.show, 'we have a type field which is a tab type');
+
+  if (type===types.movie) {
+      t.ok(d.torrents, 'we have a torrents field');
+  } else if (type===types.show) {
+      t.ok(d.episodes, 'we have an episodes field');
+      t.ok(d.episodes.length > 0, 'we have at least 1 episode');
+  } else {
+      t.notOk(type, 'is not a valid type')
+  }
 }
 
 tape.onFinish(function() {
