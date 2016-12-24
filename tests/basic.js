@@ -10,6 +10,11 @@ var config = {
     timeout: 1000
 };
 
+var types = {
+    movie: 'movie',
+    show: 'show'
+};
+
 if (pkg.butter && pkg.butter.testArgs) {
     config.args = Object.assign({}, config.args, Provider.prototype.parseArgs(pkg.butter.testArgs).args);
 }
@@ -32,7 +37,7 @@ function testDetail(t, d, uniqueId) {
   t.ok(d.subtitle, 'we have a subtitle');
   t.ok(d.trailer, 'we have a trailer');
   t.ok(d.synopsis, 'we have a synopsis');
-  t.ok(d.type===Provider.TabType.MOVIE || d.type===Provider.TabType.TVSHOW || d.type===Provider.TabType.ANIME, 'we have a type field which is a tab type');
+  t.ok(d.type===types.movie || d.type===types.show, 'we have a type field which is a tab type');
 }
 
 tape.onFinish(function() {
