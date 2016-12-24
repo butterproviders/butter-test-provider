@@ -80,3 +80,37 @@ tape('fetch', function (t) {
         t.notOk(e, 'failed fetch');
     });
 });
+
+tape('random', function (t) {
+    debug('random, timeout', config.timeout);
+    t.timeoutAfter(config.timeout);
+
+    var P = load();
+    var I = new P(config.args);
+
+    if (!I.random) {
+        t.ok(null, 'this provider does not have a random function');
+        t.end();
+    }
+
+    I.random().then(function (r) {
+        debug ('random', r);
+        t.ok(r, 'we were able to get a random');
+        t.ok(r[I.config.uniqueId] || d.id, 'we have an unique id');
+        t.ok(r.title, 'we have a title');
+        t.ok(r.year, 'we have a year');
+        t.ok(r.genre, 'we have a genre field');
+        t.ok(r.genre.length > 0, 'we have at least 1 genre');
+        t.ok(r.rating, 'we have a rating');
+        t.ok(r.poster, 'we have a poster');
+        t.ok(r.backdrop, 'we have a backdrop');
+        t.ok(r.torrents, 'we have a torrents field');
+        t.ok(r.subtitle, 'we have a subtitle');
+        t.ok(r.trailer, 'we have a trailer');
+        t.ok(r.synopsis, 'we have a synopsis');
+        t.ok(r.type===Generic.TabType.MOVIE || r.type===Generic.TabType.TVSHOW || r.type===Generic.TabType.ANIME, 'we have a type field w');
+        t.end();
+    }).catch(function (e) {
+        t.notOk(e, 'failed fetch');
+    });
+});
