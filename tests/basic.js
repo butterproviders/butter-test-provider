@@ -32,7 +32,7 @@ function testDetail(t, d, uniqueId) {
   t.ok(d.synopsis, 'we have a synopsis');
 
   var type = d.type;
-  t.ok(type===Provider.ItemType.MOVIE || type===Provider.ItemType.TVSHOW, 'we have a type field which is a tab type');
+  t.ok(type===Provider.ItemType.MOVIE || type===Provider.ItemType.TVSHOW, 'we have a type field which is an item type');
 
   if (type === Provider.ItemType.MOVIE) {
       t.ok(d.trailer, 'we have a trailer');
