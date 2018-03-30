@@ -1,10 +1,15 @@
 {
   "name": "butter-test-provider",
   "version": "0.0.5",
-  "description": "Tests for butter provider",
+  "description": "install dependencies for Tests of butter provider",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: you should not run this test alone, run butter-install-tests to setup testing\" && exit 1",
+    "lint": "echo \"Error: you should not run this test alone, run butter-install-tests to setup linting\" && exit 1",
+    "install": "node index.js"
+  },
+  "bin": {
+    "butter-install-tests": "./index.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +29,12 @@
   "homepage": "https://github.com/butterproviders/butter-test-provider#readme",
   "dependencies": {
     "butter-provider": "^0.6.0",
+    "chai": "^4.1.2",
     "debug": "^2.2.0",
+    "eslint": "^4.19.1",
+    "mocha": "^5.0.5",
+    "modify-pkg-up": "^1.0.1",
     "tape": "^4.4.0"
-  }
+  },
+  "devDependencies": {}
 }
