@@ -6,7 +6,7 @@ modifyPkgUp((pkg) => {
     return Object.assign(pkg,{
         scripts: {
             "test": "mocha ./node_modules/butter-provider/tests/*",
-            "lint": "eslint tests/** index.js"
+            "lint": "standard --env mocha"
         }
     })
 })
